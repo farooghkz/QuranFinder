@@ -1,38 +1,55 @@
-Quran Finder
+KoranFinder
 ============
 
-Limnoria/Supybot plugin that brings verses from Quran using a website API
+KoranFinder is a fork of
+[QuranFinder](https://github.com/SafaAlfulaij/QuranFinder) which is a Limnoria
+plugin to get Quran verses using Global Quran API.
 
-It was developed by a member of ##islam channel in freenode.net IRC network.
+## History
+It was first time developed by a ##islam channel member on freenode then it was
+moved to Github. After about 2 years(this year that I write this and is near
+the end of 2017) I(=Farooq) forked it and changed its name to `KoranFinder` so
+I can maintain it myself(it seems they don't have much time maintaining this).
 
-How to Use:
+## Usage
 
 ```
-!quran <surah> <ayah> <lang>
+Mybot: quran <surah> <ayah/ayat> [lang]
 ```
 returns ayah number \<ayah\> of surah number \<surah\> in \<lang\> language.
+By default, `lang` is `en` which refers to English.
+To get just one ayah you should go like this:
 
 ```
-!quran 1 1 en
+Mybot: quran 1 1 en
 ```
-Returns 
+Which returns 
 ```
 1,1: Praise be to Allah, Lord of the Worlds,
 ```
+You could also get more than one ayah, like:
+```
+Mybot: quran 1 1-3
+Mybot: quran 1 1,2,4
+```
+Which returns ayat 1 to 3 from surah 1 and ayat 1,2,4 from surah 1.
+You can also combine them:
+```
+Mybot: quran 1 1-3,5
+```
+Which returns ayat 1 to 3 and also 5 from surah 1.
 
 The bot can obtain translation of the Quran for different languages. (ar, en, fa, tr) are the main ones. You can get extra translations and other data sources by using the data source key provided by Global Quran API. For more information see the [Wiki](https://github.com/SafaAlfulaij/QuranFinder/wiki)
 
-One example is:
+For example
 ```
-!quran 1 1 en.hilali
+Mybot: quran 1 1 en.hilali
 ```
-which will provide the Hilali English translation of the Quran.
+provides the Hilali English translation of the Quran.
 
-_NOTE: the '!' character is just prefix command character of the bot and may be different depending how the bot was configured_
-
-## License
-This program is free software under GNU General Public License 3 or any later version and COMES WITHOUT AND WARRANTY, for more information see LICENSE.
+## Licence
+This program is free software under GNU General Public License 3 or any later version and COMES WITHOUT ANY WARRANTY, for more information see LICENCE.
 
 ## To-Do
-- [ ] Don't send a message for each ayah and split messages, instead use supybot's more
-- [ ] Use config.py for the maximum difference between two verses(by default) it is 5
+- [ ] Don't send a message for each ayah and split messages, instead use supybot's more(works for English but not Arabic)
+- [ ] Use config.py for the maximum difference between two verses which by default is 5.

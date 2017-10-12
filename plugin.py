@@ -1,19 +1,24 @@
-# Copyright 2016 Safa AlFulaij <safa1996alfulaij@gmail.com>
-#
-# This file is part of QuranFinder.
-#
-# QuranFinder is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# QuranFinder is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with QuranFinder.  If not, see <http://www.gnu.org/licenses/>.
+'''
+    Copyright 2017 Farooq Karimi Zadeh <farooghkz at ompbx dot org>
+
+    This file is part of KoranFinder.
+
+    KoranFinder is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this software.  If not, see <http://www.gnu.org/licenses/>.
+
+    On Debian systems you probably can find a version of GPLv3 in
+    /usr/share/common-licenses/
+'''
 
 import supybot.utils as utils
 from supybot.commands import *
@@ -22,7 +27,7 @@ import supybot.ircutils as ircutils
 import supybot.callbacks as callbacks
 try:
     from supybot.i18n import PluginInternationalization
-    _ = PluginInternationalization('QuranFinder')
+    _ = PluginInternationalization('KoranFinder')
 except ImportError:
     # Placeholder that allows to run the plugin on a bot
     # without the i18n module
@@ -63,7 +68,7 @@ class qdata():
         # the ID differs for each verse. So there is no static key to call in the main json.
         for quran in json:
             json = json[quran]
-            for quranVer in json: # the QuranID in the json. Here we used quranVar to avoid conflict with the quranID above.
+            for quranVer in json: # the KoranID in the json. Here we used quranVar to avoid conflict with the quranID above.
                 json = json[quranVer]
                 for ID in json:
                     json = json[ID]
@@ -76,25 +81,31 @@ class qdata():
         self.ayahText = json["verse"]
 class utilities():
     def arg2list(ayat): # TODO: better name for this function
-        MAX_DIFF = 5
-        try:
-            return [int(ayat)]
-        except ValueError:
-            t = ayat.split('-') 
-            start, end = int(t[0]), int(t[1])
-            if (end - start) not in range(1, MAX_DIFF + 1):
-                raise ValueError("Out of range(maximum is 5) or start ayah is" +
-                " bigger than end ayah.") #TODO: a better message please
+        MAX_AYAT = 6
+        ayat = ayat.split(",")
+        ayat_l = []
+        for aya in ayat:
+            if aya.isdigit():
+                ayat_l += [int(aya)]
             else:
-                return list(range(start, end + 1))
+                t = aya.split('-') 
+                start, end = int(t[0]), int(t[1])
+                ayat_l += list(range(start, end + 1))
+
+        if len(ayat_l) > MAX_AYAT:
+            raise ValueError("Sorry, you can get just " + str(MAX_AYAT) +
+                    " ayat each time calling me.")
+        else:
+            return ayat_l
+
             
 
 
-class QuranFinder(callbacks.Plugin):
+class KoranFinder(callbacks.Plugin):
     """This plugin gets verse and ayah number and sends you the ayah using a web API."""
 
     def __init__(self, irc):
-         self.__parent = super(QuranFinder, self)
+         self.__parent = super(KoranFinder, self)
          self.__parent.__init__(irc)
 
     def quran(self, irc, msg, args, surah, ayat, lang):
@@ -138,7 +149,7 @@ class QuranFinder(callbacks.Plugin):
 
 
 
-Class = QuranFinder
+Class = KoranFinder
 
 
 # vim:set shiftwidth=4 softtabstop=4 expandtab textwidth=79:
