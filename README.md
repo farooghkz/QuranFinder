@@ -6,9 +6,9 @@ KoranFinder is a fork of
 plugin to get Quran verses using Global Quran API.
 
 ## History
-It was first time developed by a ##islam channel member on freenode then it was
-moved to Github. After about 2 years(this year that I write this and is near
-the end of 2017) I(=Farooq) forked it and changed its name to `KoranFinder` so
+It was first time developed by a ##islam channel member on freenode. a few days
+later it was
+moved to Github. Now that I check the first commit was Mar 27, 2016. After about 2 years I forked it and changed its name to `KoranFinder` so
 I can maintain it myself(it seems they don't have much time maintaining this).
 
 ## Usage
