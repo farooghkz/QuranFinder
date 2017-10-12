@@ -27,19 +27,22 @@ KoranFinder: Brings verses from Quran
 import supybot
 import supybot.world as world
 
-# Use this for the version of this plugin.  You may wish to put a CVS keyword
-# in here if you're keeping the plugin in CVS or some similar system.
 __version__ = "0.01"
 
-# XXX Replace this with an appropriate author or supybot.Author instance.
-__author__ = supybot.authors.unknown
+__author__ = supybot.Author("Farooq Karimi Zadeh", "FarooqKZ",
+        "farooghkz@openmailbox.org")
 
-# This is a dictionary mapping supybot.Author instances to lists of
-# contributions.
-__contributors__ = {}
+__contributors__ = { # Let's don't forget that dictionaries don't have order!
+        supybot.Author("##islam channel member on Freenode"),
+        supybot.Author("Antti Siponen", "lantti"),
+        supybot.Author("Usama Akkad", "damascene", "uahello@gmail.com"),
+        supybot.Author("Safa Alfulaij", "SafaAlfulaij",
+            "safaalfulaij@hotmail.com"),
+        supybot.Author("Farooq Karimi Zadeh", "FarooqKZ",
+            "farooghkz@openmailbox.org")
+        } 
 
-# This is a url where the most recent plugin package can be downloaded.
-__url__ = ''
+__url__ = 'https://github.com/farooqkz/KoranFinder'
 
 from . import config
 from . import plugin
