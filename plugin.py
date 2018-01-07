@@ -144,7 +144,7 @@ class KoranFinder(callbacks.Plugin):
             else:
                 irc.reply(ayah)
 
-    quran = wrap(quran, ["int", "something", optional("something")])
+    koran = wrap(koran, ["int", "something", optional("something")])
 
 
 
