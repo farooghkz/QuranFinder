@@ -108,7 +108,7 @@ class KoranFinder(callbacks.Plugin):
          self.__parent = super(KoranFinder, self)
          self.__parent.__init__(irc)
 
-    def quran(self, irc, msg, args, surah, ayat, lang):
+    def koran(self, irc, msg, args, surah, ayat, lang):
         """<surah> <ayah/ayat> <lang>
 
         returns ayah number <ayah> of surah number <surah> in <lang> language or translation or tafsir. for more information visit: https://git.io/vwMz9
