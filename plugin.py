@@ -103,6 +103,7 @@ class utilities():
 
 class KoranFinder(callbacks.Plugin):
     """This plugin gets verse and ayah number and sends you the ayah using a web API."""
+    threaded = True
 
     def __init__(self, irc):
          self.__parent = super(KoranFinder, self)
