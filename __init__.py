@@ -30,7 +30,7 @@ import supybot.world as world
 __version__ = "0.01"
 
 __author__ = supybot.Author("Farooq Karimi Zadeh", "FarooqKZ",
-        "farooghkz@openmailbox.org")
+        "farooghkarimizadeh@gmail.com")
 
 __contributors__ = { # Let's don't forget that dictionaries don't have order!
         supybot.Author("##islam channel member on Freenode"),
