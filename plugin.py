@@ -67,7 +67,7 @@ class KoranFinder(callbacks.Plugin):
          self.__parent.__init__(irc)
          self.PyGQ = pygq.PyGQ(token = API_TOKEN, lg_codes=quranID)
 
-    def koran(self, irc, msg, args, surah, ayat, lang="en"):
+    def koran(self, irc, msg, args, surah, ayat, lang):
         """<surah> <ayah/ayat> <lang>
 
         returns ayah number <ayah> of surah number <surah> in <lang> language or translation or tafsir. for more information visit: https://git.io/vwMz9
@@ -104,7 +104,7 @@ class KoranFinder(callbacks.Plugin):
             else:
                 irc.reply(ayah)
 
-    koran = wrap(koran, ["int", "something", optional("something")])
+    koran = wrap(koran, ["int", "something", optional("something", "en")])
 
 Class = KoranFinder
 # vim:set shiftwidth=4 softtabstop=4 expandtab textwidth=79:
