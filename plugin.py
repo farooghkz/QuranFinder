@@ -58,9 +58,6 @@ class utilities():
         else:
             return ayat_l
 
-            
-
-
 class KoranFinder(callbacks.Plugin):
     """This plugin gets verse and ayah number and sends you the ayah using a web API."""
     threaded = True
@@ -85,7 +82,7 @@ class KoranFinder(callbacks.Plugin):
         try:
             ayat_list = []
             for ayah in list_of_ayat:
-                verse_json = self.PyGQ(surah, ayah)
+                verse_json = self.PyGQ.getAyah(surah, ayah, lang)
                 ayah_list.append(str(verse_json["surah"]) + ":" +
                                 str(verse_json["ayah"]) + ", " +
                                 str(verse_json["verse"]))
@@ -109,10 +106,5 @@ class KoranFinder(callbacks.Plugin):
 
     koran = wrap(koran, ["int", "something", optional("something")])
 
-
-
-
 Class = KoranFinder
-
-
 # vim:set shiftwidth=4 softtabstop=4 expandtab textwidth=79:
