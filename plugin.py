@@ -25,6 +25,7 @@ from supybot.commands import *
 import supybot.plugins as plugins
 import supybot.ircutils as ircutils
 import supybot.callbacks as callbacks
+import pygq
 try:
     from supybot.i18n import PluginInternationalization
     _ = PluginInternationalization('KoranFinder')
@@ -33,52 +34,11 @@ except ImportError:
     # without the i18n module
     _ = lambda x: x
 
-API_URL = "http://api.globalquran.com/ayah/" #verse:ayah/quranID
 # Set languages and translations the bot will accept
 quranID = {"ar" : "quran-simple", "en" : "en.sahih", "tr" : "tr.yazir", "fa" : "fa.fooladvand"}
 
-TOKEN = "the token" # Token obtained from http://docs.globalquran.com
+API_TOKEN = ""
 
-import requests
-
-class qdata():
-    def __init__(self, chapter, ayah, lang):
-        if(lang == None):
-            lang = "en"
-        if(len(lang) == 2):
-            if(lang not in quranID):
-                raise ValueError("Only " + " ,".join(quranID) + " languages are supported using two letters code. Maybe you would like to use a translation/tafsir code instead, Check: https://git.io/vwMz4 for a list of avalible sources.")
-            lang = quranID[lang]
-
-        if (chapter > 114 or chapter < 1):
-            raise ValueError("Invalid Surah number.")
-
-        json = self.requestData(chapter, ayah, lang)
-        self.parseResponse(json)
-
-        if (int(self.SurahNumber) != chapter): # If the ayah number is bigger
-        # than the ayahs in the surah, the API jumps to another surah.
-            raise ValueError("Invalid Ayah number.")
-
-    def requestData(self, chapter, ayah, lang):
-        url = API_URL + str(chapter) + ":" + str(ayah) + "/" + lang
-        request = requests.get(url, params = {'key' : TOKEN})
-        json = request.json()
-
-        # the ID differs for each verse. So there is no static key to call in the main json.
-        for quran in json:
-            json = json[quran]
-            for quranVer in json: # the KoranID in the json. Here we used quranVar to avoid conflict with the quranID above.
-                json = json[quranVer]
-                for ID in json:
-                    json = json[ID]
-
-        return json
-
-    def parseResponse(self, json):
-        self.SurahNumber = json["surah"]
-        self.ayahNumber = json["ayah"]
-        self.ayahText = json["verse"]
 class utilities():
     def arg2list(ayat): # TODO: better name for this function
         MAX_AYAT = 6
@@ -108,6 +68,7 @@ class KoranFinder(callbacks.Plugin):
     def __init__(self, irc):
          self.__parent = super(KoranFinder, self)
          self.__parent.__init__(irc)
+         self.PyGQ = pygq.PyGQ(token = API_TOKEN, lg_codes=quranID)
 
     def koran(self, irc, msg, args, surah, ayat, lang):
         """<surah> <ayah/ayat> <lang>
@@ -124,9 +85,10 @@ class KoranFinder(callbacks.Plugin):
         try:
             ayat_list = []
             for ayah in list_of_ayat:
-                data = qdata(surah, ayah, lang)
-                ayat_list.extend([str(data.SurahNumber) + ":" + str(data.ayahNumber)
-                           + ", " + str(data.ayahText)])
+                verse_json = self.PyGQ(surah, ayah)
+                ayah_list.append(str(verse_json["surah"]) + ":" +
+                                str(verse_json["ayah"]) + ", " +
+                                str(verse_json["verse"]))
         except ValueError as e:
             irc.error(str(e))
             return
