@@ -83,7 +83,7 @@ class KoranFinder(callbacks.Plugin):
             ayat_list = []
             for ayah in list_of_ayat:
                 verse_json = self.PyGQ.getAyah(surah, ayah, lang)
-                ayah_list.append(str(verse_json["surah"]) + ":" +
+                ayat_list.append(str(verse_json["surah"]) + ":" +
                                 str(verse_json["ayah"]) + ", " +
                                 str(verse_json["verse"]))
         except ValueError as e:
