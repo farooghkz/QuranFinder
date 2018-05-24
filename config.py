@@ -1,5 +1,5 @@
 '''
-    Copyright 2017 Farooq Karimi Zadeh <farooghkz at ompbx dot org>
+    Copyright 2018 Farooq Karimi Zadeh <farooghkarimizadeh@gmail.com
 
     This file is part of KoranFinder.
 

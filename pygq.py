@@ -1,5 +1,5 @@
 """
-    Copyright 2018 Farooq Karimi Zadeh <farooghkarimizadeh at gmail dot com>
+    Copyright 2018 Farooq Karimi Zadeh <farooghkarimizadeh@gmail.com>
 
 """
 
