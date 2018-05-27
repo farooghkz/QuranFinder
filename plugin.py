@@ -65,7 +65,8 @@ class KoranFinder(callbacks.Plugin):
     def __init__(self, irc):
          self.__parent = super(KoranFinder, self)
          self.__parent.__init__(irc)
-         self.PyGQ = pygq.PyGQ(token = API_TOKEN, lg_codes=quranID)
+         # TODO: let user config cache_size
+         self.PyGQ = pygq.PyGQ(token = API_TOKEN, lg_codes=quranID,cache_size=100)
 
     def koran(self, irc, msg, args, surah, ayat, lang):
         """<surah> <ayah/ayat> <lang>
