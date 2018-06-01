@@ -27,7 +27,7 @@ KoranFinder: Brings verses from Quran
 import supybot
 import supybot.world as world
 
-__version__ = "0.01"
+__version__ = "2018.5.27"
 
 __author__ = supybot.Author("Farooq Karimi Zadeh", "FarooqKZ",
         "farooghkarimizadeh@gmail.com")
@@ -39,7 +39,7 @@ __contributors__ = { # Let's don't forget that dictionaries don't have order!
         supybot.Author("Safa Alfulaij", "SafaAlfulaij",
             "safaalfulaij@hotmail.com"),
         supybot.Author("Farooq Karimi Zadeh", "FarooqKZ",
-            "farooghkz@openmailbox.org")
+            "farooghkarimizadeh@gmail.com")
         } 
 
 __url__ = 'https://github.com/farooqkz/KoranFinder'
