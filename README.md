@@ -1,6 +1,6 @@
 KoranFinder
 ============
-
+### This repository has migrated to https://notabug.org/farooqkz/KoranFinder
 KoranFinder is a fork of
 [QuranFinder](https://github.com/SafaAlfulaij/QuranFinder) which is a Limnoria
 plugin to get Quran verses using Global Quran API.
